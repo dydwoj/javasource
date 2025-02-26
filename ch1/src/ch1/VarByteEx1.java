@@ -2,6 +2,7 @@ package ch1;
 
 // byte : 8비트 = (1)
 // 숫자 표현 : 2의8승 = 256, 음수부터 표현 256/2 => -128 ~ 127 표현 가능
+// 클래스명은 대문자로
 
 public class VarByteEx1 {
     public static void main(String[] args) {
