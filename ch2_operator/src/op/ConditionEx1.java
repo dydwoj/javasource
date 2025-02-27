@@ -2,7 +2,7 @@ package op;
 
 // 삼항연산자 : 조건 ? 참일 때 : 거짓일 때;
 
-public class ConitionEx1 {
+public class ConditionEx1 {
     public static void main(String[] args) {
         
         int x,y,z;
