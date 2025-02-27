@@ -45,7 +45,7 @@ public class IfTest6 {
             if (score >= 88) {
                 opt = '+';
             }
-            else if (score<84) {
+            else if (score < 84) {
                 opt = '-';
             }
         }
