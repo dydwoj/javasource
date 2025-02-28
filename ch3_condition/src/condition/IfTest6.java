@@ -7,26 +7,26 @@ import java.util.Scanner;
 
 public class IfTest6 {
     public static void main(String[] args) {
-        
+
         // if (condition) {
-        //     if (condition) {
-                
-        //     } else {
-        //         if (condition) {
-                    
-        //         } else {
-                    
-        //         }
-        //     }
+        // if (condition) {
+
         // } else {
-            
+        // if (condition) {
+
+        // } else {
+
+        // }
+        // }
+        // } else {
+
         // }
 
         // A+ : 98 이상 / A- : 94 이상 / A0 : 90 이상
-        // B 
+        // B
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("점수 입력"); 
+        System.out.println("점수 입력");
         String input = scanner.nextLine();
         int score = Integer.parseInt(input);
 
@@ -35,25 +35,22 @@ public class IfTest6 {
             grade = 'A';
             if (score >= 98) {
                 opt = '+';
-            }
-            else if (score <94) {
+            } else if (score < 94) {
                 opt = '-';
             }
-        }
-        else if (score >= 80) {
+        } else if (score >= 80) {
             grade = 'B';
             if (score >= 88) {
                 opt = '+';
-            }
-            else if (score < 84) {
+            } else if (score < 84) {
                 opt = '-';
             }
-        }
-        else {
+        } else {
             grade = 'C';
         }
 
         System.out.printf("당신의 학점은 %c%c 입니다.", grade, opt);
+        scanner.close();
 
     }
 }

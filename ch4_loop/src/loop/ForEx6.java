@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ForEx6 {
     public static void main(String[] args) {
-        
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("원하는 숫자 입력");
         String input = scanner.nextLine();
@@ -19,5 +19,6 @@ public class ForEx6 {
             fact *= i;
         }
         System.out.println(num + "의 팩토리얼은 " + fact + "입니다");
+        scanner.close();
     }
 }
