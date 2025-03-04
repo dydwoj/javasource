@@ -5,7 +5,7 @@ package ch1;
 
 public class ScopeEx1 {
     public static void main(String[] args) {
-        
+
         int a = 100; // 여기서의 a 는 main 의 범위 내에서 사용가능
 
         {
@@ -21,12 +21,13 @@ public class ScopeEx1 {
 
         if (a < 200) {
             int sum = 0; // sum은 if문에서만 사용 가능
+            System.out.println(sum);
         }
 
         // System.out.println(sum); => if 범위 밖이라 sum 사용불가
 
         for (int i = 0; i < args.length; i++) {
-            
+
         }
         // System.out.println(i); => 여기의 i도 for문 범위 밖이라 사용 불가
 
