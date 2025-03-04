@@ -57,6 +57,6 @@ public class BreakEx3 {
                     break;
             }
         }
-
+        sc.close();
     }
 }

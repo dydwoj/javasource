@@ -57,7 +57,7 @@ public class ForEx2 {
 
         int i = 0; // for문 바깥쪽에 초기화 선언 가능 그대신 for 문 안에서는 ; 써주고 조건 입력
         for (int j = 0, k = 0; i < args.length; i++) { // 초기화 선언은 여러개 선언 가능! / 조건(&&, ||, !=)도 여러개 선언 가능
-
+            System.out.println(j + " " + k);
         }
 
         // for (; ;) { <= 날려도 가능! but 무한루프

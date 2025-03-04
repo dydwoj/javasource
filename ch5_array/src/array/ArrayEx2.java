@@ -11,7 +11,7 @@ import java.util.Arrays;
  * 3) Arrays.toString(배열명) : [배욜요소 출력]
  */
 
-public class AraayEx2 {
+public class ArrayEx2 {
     public static void main(String[] args) {
 
         int[] arr = new int[10]; // int 뒤의 "[]" 위치는 배열명 앞 or 뒤 둘 다 가능
