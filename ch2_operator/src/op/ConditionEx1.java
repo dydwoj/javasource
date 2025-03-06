@@ -4,8 +4,8 @@ package op;
 
 public class ConditionEx1 {
     public static void main(String[] args) {
-        
-        int x,y,z;
+
+        int x, y, z;
 
         x = 10;
         y = -5;
@@ -18,6 +18,7 @@ public class ConditionEx1 {
 
         // y의 값이 0보다 크면 'A' 아니면 'B'
         char ch = y > 0 ? 'A' : 'B';
+        System.out.println(ch);
 
         // z의 값이 0보다 크면 "A" 아니면 "B"
         String str = z > 0 ? "A" : "B";

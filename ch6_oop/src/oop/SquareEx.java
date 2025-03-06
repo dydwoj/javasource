@@ -8,11 +8,11 @@ public class SquareEx {
         Square square = new Square(10);
         System.out.println("면적 : " + square.getArea());
 
-        // 타입 배열명[] = new 타입[5];
-        // 타입 배열명[] = {};
+        // 타입[] 배열명 = new 타입[5];
+        // 타입[] 배열명 = {};
 
         // 객체 배열
-        // 객체(클래스)명 배열명[] = new 객체(클래스)명[]
+        // 객체(클래스)명[] 배열명 = new 객체(클래스)명[]
 
         // => 기초값 : 객체값=null, 기본형은=그 값
         // 정수형 - 0 / 실수형 - 0.0 / 불린형 - false / 문자형 - null

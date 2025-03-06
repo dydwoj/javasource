@@ -7,12 +7,12 @@ public class Student {
 
     // 속성 : 학번(s1024125), 이름(홍길동), 학년(1), 반(1), 전화번호(010-1234-1234)
     // 이메일(hong@gamil.com)
-    String stuId;
-    String name;
-    int grade;
-    int classNum;
-    String phone;
-    String email;
+    private String stuId;
+    private String name;
+    private int grade;
+    private int classNum;
+    private String phone;
+    private String email;
 
     // 생성자 : 클래스명(){} : 개발자가 명시하지 않으면 컴파일러가 자동으로 default 생성자 만들어 줌 but 생성자를 지정하면
     // 기본값은 작동 X
@@ -36,8 +36,31 @@ public class Student {
     } // => 이것도 생성자
 
     // 주의!! : 생성자에서 () 안의 갯수는 달라야 한다
-
     // 기능 : 전화번호 변경한다, 이메일을 변경한다, 학년을 변경한다, 반을 변경한다
+
+    public String getStuId() {
+        return stuId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public int getClassNum() {
+        return classNum;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 
     // 메소드(소문자로 시작) : 리턴타입 메소드명(){}
     // 리턴(반환) 타입 : 기본타입(정수, 실수, 문자, 불린형), 객체(대문자로 시작), 배열, void(리턴타입 없음의 의미)
