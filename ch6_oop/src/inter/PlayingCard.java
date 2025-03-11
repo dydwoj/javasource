@@ -9,6 +9,8 @@ package inter;
     <장점>
         1. 표준화가 가능하다
         2. 관계가 없는 클래스들에게 관계를 맺어 줄 수도 있다
+        3. 의존성 약화 => 어떤 객체를 매개변수로서 호출하던지 인터페이스의 내용만을 보고 쉽게 변경 가능
+            ㄴ 다른 클래스에 대한 민감도를 낮춤
 
     Movable, Attakable, Unit, Fightable 묶음 = interface의 "다중상속"
         클래스는 단일상속만 가능 (ex. class A extends B{} + 여러개 불가!)
