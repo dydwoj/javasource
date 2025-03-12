@@ -13,7 +13,7 @@ public abstract class Compare {
     private int num9;
     private int num10;
 
-    public void add() {
+    public void add(long x) {
     }
 
     public void subtract() {
