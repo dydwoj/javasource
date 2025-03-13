@@ -1,23 +1,18 @@
 package shop;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-// 배열 -> 리스트로 변경해서 만들기
+// MyShop 원본
 
-public class MyShop implements IShop {
+public class MyShop2 implements IShop {
 
     private String title;
     // 고객 5명 담기
-    // private User[] users = new User[5];
-    private List<User> users = new ArrayList<>(5);
+    private User[] users = new User[5];
     // 제품 10개 담기
-    // Product[] products = new Product[10];
-    private List<Product> products = new ArrayList<>();
+    Product[] products = new Product[10];
     // cart (제품 저장 가능한 배열)
-    // Product[] cart = new Product[10];
-    List<Product> cart = new ArrayList<>();
+    Product[] cart = new Product[10];
 
     Scanner sc = new Scanner(System.in);
 
@@ -32,24 +27,17 @@ public class MyShop implements IShop {
     @Override
     public void genUser() {
         // 2명 생성하기
-        // users[0] = new User("홍길동", PayType.CARD);
-        users.add(new User("홍길동", PayType.CARD));
-        // users[1] = new User("성춘향", PayType.CASH);
-        users.add(new User("성춘향", PayType.CASH));
+        users[0] = new User("홍길동", PayType.CARD);
+        users[1] = new User("성춘향", PayType.CASH);
     }
 
     @Override
     public void genProduct() {
-        // products[0] = new Tv("삼성 QLED", 5000000, "4K");
-        // products[1] = new Tv("LG 올레드", 6500000, "4K");
-        // products[2] = new CellPhone("갤럭시 S24+", 1100000, "SKT");
-        // products[3] = new CellPhone("아이폰 14pro max", 1550000, "KT");
-        // products[4] = new CellPhone("아이폰 12pro", 1400000, "U+");
-        products.add(new Tv("삼성 QLED", 5000000, "4K"));
-        products.add(new Tv("LG 올레드", 6500000, "4K"));
-        products.add(new CellPhone("갤럭시 S24+", 1100000, "SKT"));
-        products.add(new CellPhone("아이폰 14pro max", 1550000, "4K"));
-        products.add(new CellPhone("아이폰 12pro", 1400000, "U+"));
+        products[0] = new Tv("삼성 QLED", 5000000, "4K");
+        products[1] = new Tv("LG 올레드", 6500000, "4K");
+        products[2] = new CellPhone("갤럭시 S24+", 1100000, "SKT");
+        products[3] = new CellPhone("아이폰 14pro max", 1550000, "KT");
+        products[4] = new CellPhone("아이폰 12pro", 1400000, "U+");
     }
 
     @Override
@@ -118,7 +106,12 @@ public class MyShop implements IShop {
             case "2":
             case "3":
             case "4":
-                cart.add(products.get(Integer.parseInt(input)));
+                for (int k = 0; k < cart.length; k++) {
+                    if (cart[k] == null) {
+                        cart[k] = products[Integer.parseInt(input)];
+                        break;
+                    }
+                }
                 System.out.println("상품이 담겼습니다.");
                 productList();
                 break;
@@ -130,7 +123,7 @@ public class MyShop implements IShop {
     }
 
     public void checkout() {
-        System.out.printf("%s : %s - 체크아웃\n", title, users.get(Integer.parseInt(selUser)).getName());
+        System.out.printf("%s : %s - 체크아웃\n", title, users[Integer.parseInt(selUser)].getName());
         System.out.println("===================================");
         int i = 0, sum = 0;
         for (Product product : cart) {
@@ -139,7 +132,7 @@ public class MyShop implements IShop {
                 sum += product.getPrice();
             }
         }
-        System.out.println("결제방법 : " + users.get(Integer.parseInt(selUser)).getPayType());
+        System.out.println("결제방법 : " + users[Integer.parseInt(selUser)].getPayType());
         System.out.println("합계 : " + sum);
         System.out.println("===================================");
         System.out.println("[p] 이전");
