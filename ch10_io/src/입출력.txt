@@ -10,6 +10,8 @@
         => byte 형태로 처리를 해야 문자, 이미지, 동영상 등 어떤 파일이든 가져올 수 있음
     * ctrl + c : 강제 종료
     * enter : 두가지 동작으로 이루어짐 => 캐리지리턴(13) + 라인피드(10)
+    * append : 기존 파일 데이터에 새로 만드는게 아닌 추가한다는 개념
+    * Charset : 인코딩 방식 지정 (utf-8 : 한글이 깨지므로 한글을 받아주는 방식)
 
     입력장치(키보드, 파일, 객체 등...)에서 읽어오기
         1) text 파일 : 문자스트림
@@ -28,6 +30,33 @@
                 write(int b)
                 write(byte b[])
                 write(byte b[], int off, int len)
+        - Reader : 문자기반 읽어오기 / 추상클래스
+            => 문자기반이라면 FileInputStream 보다 훨씬 편함
+            메서드
+                스트림 계열과 동일
+        - Writer : 문자기반 출력하기 / 추상클래스
+            메서드
+                스트림 계열과 동일
+
+    보조스트림
+        - BufferedInputStream : 중간 작업
+            순서 : 파일 => FileInputStream => BufferedInputStream => 자바
+            메서드
+                newLine() : 엔터
+        - BufferedOutputStream : 중간 작업
+            순서 : 파일 => FileOutputStream => BufferedOutputStream => 자바
+
+    Scanner
+        => InputStream 보다 편함
+        => 형변환이 이미 되어 있음
+
+        메서드
+            1) next()
+               nextInt() : 숫자로 가져옴
+                => 줄단위로 가져오는게 아닌 숫자만 가져감 (엔터를 읽지 않음)
+               nextLine() : String 으로 가져옴
+                => 줄단위로 가져옴 (엔터를 읽음)
+
 
     File : java에서 파일(텍스트, 이미지, 동영상 등...)처리를 담당하는 객체
         File이 없다고 객체 생성이 안되는건 아님
