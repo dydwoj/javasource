@@ -37,9 +37,10 @@ public class SelectEx4 {
 
                 // emp 테이블 : empno = 7369 조회
                 // String sql = "select * from emp where empno =" + empno;
-                String sql = "SELECT e.EMPNO, e.DEPTNO, e.SAL, d.DNAME, d.LOC";
-                sql += "FROM EMP e , DEPT d";
+                String sql = "SELECT e.EMPNO, e.DEPTNO, e.SAL, d.DNAME, d.LOC ";
+                sql += "FROM EMP e , DEPT d ";
                 sql += "WHERE e.DEPTNO = d.DEPTNO AND e.SAL <= 2500 AND e.EMPNO <= 9999";
+                // 입력하는 부분이 길어질때는 += 과 함께 문단에 공백(스페이스바) 삽입해야 에러가 안남
 
                 // Statement 객체 생성
                 pstmt = con.prepareStatement(sql);
