@@ -1,15 +1,17 @@
-<< JDBC 규칙 >>
+<< JDBC >>
 
-    참고 : Select
+    참고 : Select, dml
 
-    * String sql = "select * from emp where empno =" + empno;
-        => SQL Injection 공격의 위험이 있음
-        => String sql = "select * from emp where empno = ?";
-                * ? : 뭔가가 들어갈 거라는 의미
-            => pstmt.setInt(1, empno);
-                * 1 : 물음표의 순서 => 즉, 위 구문은 첫번째 ? 자리의 empno 검색해달라는 의미
-    
-    - 순서
+    * static : 인스턴스 변수, 인스턴스 메서드 앞에 붙으면 공유
+        => 생성되는 모든 인스턴스가 같은 걸 사용
+        => 로드 시점이 가정 처음에 로드 됨
+    * 디버깅 걸기 : 번호 앞에 빨간점(add breaking point => 여기서 멈춘다는 의미)
+        => 이후에 Run Java 가 아닌 Debug Java 로 실행
+        - 다음 작업 진행 : f10
+        - 작업 진행 방향으로 진입하기 : f11
+        - 점 두개찍고 F5 : 두번째 점으로 바로 이동
+
+    - JDBC 작성 순서(규칙)
         1. JDBC 드라이버 로드
         2. Connection 객체 생성
             url : jdbc:oracle:thin: => 까지는 오라클 연결 문자열(서버마다 상이)
@@ -21,5 +23,29 @@
         4. Query 수행
         5. ResultSet 객체로부터 데이터 추출
         6. ResultSet close
+            => select 문이 아니면 필요없음
         7. Statement close
         8. Connection close
+
+    메서드
+        1) executeQuery() : 셀렉트 구문일 때 사용
+        2) executeUpdate() : 셀렉트 구문 제외일 때 사용
+    
+    << DTO, DAD >>
+        ~~~DTO : Data Transfer Object
+            => 메서드에서 데이터를 담아서 전달하는 객체
+            - 참고 : dto, emp
+        ~~~DAO : Data Access Object
+            => DB 작업을 모아놓은 객체
+            - 참고 : emp
+
+        - 사용의미
+            => 여러가지의 입력을 위해서 사용
+                => but. 타입이 여러가지 이기 때문에 한개의 클래스를 별도로 생성해서 담는다
+
+        * String sql = "select * from emp where empno =" + empno;
+        => SQL Injection 공격의 위험이 있음
+            => String sql = "select * from emp where empno = ?";
+                    * ? : 뭔가가 들어갈 거라는 의미
+                => 변수명.setInt(1, empno);
+                    * 1 : 물음표의 순서 => 즉, 위 구문은 첫번째 ? 자리의 empno 검색해달라는 의미
