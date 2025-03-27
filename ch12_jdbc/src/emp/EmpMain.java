@@ -1,5 +1,6 @@
 package emp;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class EmpMain {
@@ -17,8 +18,9 @@ public class EmpMain {
             System.out.println("1. 입력");
             System.out.println("2. 수정");
             System.out.println("3. 삭제");
-            System.out.println("4. 조회");
-            System.out.println("5. 종료");
+            System.out.println("4. 전체조회");
+            System.out.println("5. 특정사원조회");
+            System.out.println("6. 종료");
             System.out.println("=====================================");
 
             System.out.print("메뉴 >> ");
@@ -30,7 +32,6 @@ public class EmpMain {
                     System.out.println(result > 0 ? "입력 성공" : "입력 실패");
                     break;
                 case 2:
-
                     eDto = updateInfo(scanner);
                     result = eDao.update(eDto);
                     System.out.println(result > 0 ? "변경 성공" : "변경 실패");
@@ -41,9 +42,15 @@ public class EmpMain {
                     System.out.println(result > 0 ? "삭제 성공" : "삭제 실패");
                     break;
                 case 4:
-
+                    List<EmpDTO> list = eDao.selectAll();
+                    empPrint(list);
                     break;
                 case 5:
+                    empNo = getRow(scanner);
+                    eDto = eDao.select(empNo);
+                    System.out.println(eDto);
+                    break;
+                case 6:
                     System.out.println("시스템을 종료합니다");
                     run = false;
                     break;
@@ -54,25 +61,6 @@ public class EmpMain {
         }
 
         scanner.close();
-    }
-
-    public static int deleteInfo(Scanner scanner) {
-        // 삭제할 empNo 입력 받은 후 리턴
-        System.out.println("삭제 대상 empNo >> ");
-        int empNo = Integer.parseInt(scanner.nextLine());
-        return empNo;
-    }
-
-    public static EmpDTO updateInfo(Scanner scanner) {
-        // 수정할 empNo 입력 받기
-        System.out.print("수정 대상 empNo >> ");
-        int empNo = Integer.parseInt(scanner.nextLine());
-        // 수정할 급여 입력 받기
-        System.out.print("변경 급여 >> ");
-        int sal = Integer.parseInt(scanner.nextLine());
-        //
-        EmpDTO eDto = EmpDTO.builder().empNo(empNo).sal(sal).build();
-        return eDto;
     }
 
     public static EmpDTO insertInfo(Scanner scanner) {
@@ -117,4 +105,48 @@ public class EmpMain {
         // 빌더 사용 안한 방법
         return new EmpDTO(empNo, eName, job, mgr, hireDate, sal, comm, deptNo);
     }
+
+    public static EmpDTO updateInfo(Scanner scanner) {
+        // 수정할 empNo 입력 받기
+        System.out.print("수정 대상 empNo >> ");
+        int empNo = Integer.parseInt(scanner.nextLine());
+        // 수정할 급여 입력 받기
+        System.out.print("변경 급여 >> ");
+        int sal = Integer.parseInt(scanner.nextLine());
+        //
+        EmpDTO eDto = EmpDTO.builder().empNo(empNo).sal(sal).build();
+        return eDto;
+    }
+
+    public static int deleteInfo(Scanner scanner) {
+        // 삭제할 empNo 입력 받은 후 리턴
+        System.out.println("삭제 대상 empNo >> ");
+        int empNo = Integer.parseInt(scanner.nextLine());
+        return empNo;
+    }
+
+    public static void empPrint(List<EmpDTO> list) {
+        System.out.println("===========================================================================");
+        System.out.println("사번    이름    직무    매니저번호    입사일    급여    수당    부서번호");
+
+        for (EmpDTO empDTO : list) {
+            System.out.print(empDTO.getEmpNo() + "\t");
+            System.out.print(empDTO.getEName() + "\t");
+            System.out.print(empDTO.getJob() + "\t");
+            System.out.print(empDTO.getMgr() + "\t");
+            System.out.print(empDTO.getHireDate() + "\t");
+            System.out.print(empDTO.getSal() + "\t");
+            System.out.print(empDTO.getComm() + "\t");
+            System.out.print(empDTO.getDeptNo());
+            System.out.println();
+        }
+    }
+
+    public static int getRow(Scanner scanner) {
+        // 조회할 empno 입력 받은 후 리턴
+        System.out.println("조회 대상 empNo >> ");
+        int empNo = Integer.parseInt(scanner.nextLine());
+        return empNo;
+    }
+
 }
