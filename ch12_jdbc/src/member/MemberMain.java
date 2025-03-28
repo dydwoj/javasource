@@ -1,5 +1,6 @@
 package member;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MemberMain {
@@ -39,13 +40,33 @@ public class MemberMain {
                     }
                     break;
                 case 3:
-
+                    String id = util.memberDeleteInfo(sc);
+                    result = mDao.delete(id);
+                    // 삭제 성공 메세지 출력 메서도 호출
+                    util.printDeleteSuccessMessage(result, id);
                     break;
                 case 4:
+                    String input = util.memberGetInfo(sc);
+                    // input.matches(regex)
+                    if (input.matches("^[Aa-z].*")) {
+                        MemberDTO row = mDao.getRow(input);
+                        if (row != null) {
+                            util.memberPrint(row);
+                        }
+                    } else {
+                        List<MemberDTO> list = mDao.getNameList(input);
+                        if (!list.isEmpty()) {
+                            util.memberSelectPrint(list);
+                        }
+                    }
+                    // 아이디는 영어로 시작 => getRow()
 
+                    // 이름은 한글로 시작 => getNameList
+                    // 출력 메서드
                     break;
                 case 5:
-
+                    List<MemberDTO> list = mDao.getlist();
+                    util.memberAllPrint(list);
                     break;
                 case 6:
                     System.out.println("프로그램을 종료합니다");

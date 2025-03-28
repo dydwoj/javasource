@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDAO {
 
@@ -61,8 +63,8 @@ public class MemberDAO {
         con = getConnection();
         int result = 0;
         try {
-            String sql = "insert into member(id, name, addr, email, age) ";
-            sql += "values(?,?,?,?,?)";
+            String sql = "insert into member(no, id, name, addr, email, age) ";
+            sql += "values(member_seq.nextval, ?,? ,? ,? ,?)";
             pstmt = con.prepareStatement(sql);
             // ? 해결
             pstmt.setString(1, memberDto.getId());
@@ -111,6 +113,108 @@ public class MemberDAO {
         }
 
         return result;
+    }
+
+    // delete : 전달인자 = pk 사용함
+    public int delete(String id) {
+        int result = 0;
+        con = getConnection();
+        String sql = "delete from member where id = ?";
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt);
+        }
+        return result;
+    }
+
+    // 조회
+    public MemberDTO getRow(String id) {
+        MemberDTO memberDTO = null;
+        con = getConnection();
+        String sql = "select * from member where id = ?";
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            // rs => DTO 옮기기
+            if (rs.next()) {
+                memberDTO = new MemberDTO();
+                memberDTO.setNo(rs.getInt("no"));
+                memberDTO.setId(rs.getString("id"));
+                memberDTO.setName(rs.getString("name"));
+                memberDTO.setAddr(rs.getString("addr"));
+                memberDTO.setEmail(rs.getString("email"));
+                memberDTO.setAge(rs.getInt("age"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt, rs);
+        }
+        return memberDTO;
+    }
+
+    // 전체 조회
+    public List<MemberDTO> getlist() {
+        List<MemberDTO> list = new ArrayList<>();
+
+        con = getConnection();
+        String sql = "select * from member";
+        try {
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            // rs => DTO 옮기기
+            while (rs.next()) {
+                MemberDTO memberDTO = new MemberDTO();
+                memberDTO.setNo(rs.getInt("no"));
+                memberDTO.setId(rs.getString("id"));
+                memberDTO.setName(rs.getString("name"));
+                memberDTO.setAddr(rs.getString("addr"));
+                memberDTO.setEmail(rs.getString("email"));
+                memberDTO.setAge(rs.getInt("age"));
+                list.add(memberDTO);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt, rs);
+        }
+        return list;
+    }
+
+    // select * from where name like '%홍%'
+    public List<MemberDTO> getNameList(String name) {
+        List<MemberDTO> list = new ArrayList<>();
+        MemberDTO memberDTO = null;
+
+        con = getConnection();
+        String sql = "select * from member where name like ?";
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, "%" + name + "%");
+            rs = pstmt.executeQuery();
+            // rs => DTO 옮기기
+            while (rs.next()) {
+                memberDTO = new MemberDTO();
+                memberDTO.setNo(rs.getInt("no"));
+                memberDTO.setId(rs.getString("id"));
+                memberDTO.setName(rs.getString("name"));
+                memberDTO.setAddr(rs.getString("addr"));
+                memberDTO.setEmail(rs.getString("email"));
+                memberDTO.setAge(rs.getInt("age"));
+                list.add(memberDTO);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt, rs);
+        }
+        return list;
     }
 
 }
