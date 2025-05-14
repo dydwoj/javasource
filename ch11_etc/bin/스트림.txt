@@ -1,0 +1,78 @@
+<< Stream >>
+        IntStream, LongStream
+    => 컬렉션(배열 포함)의 저장 요소를 하나씩 참조해서 람다식으로 처리할 수 있도록 도와주는 반복자
+    => 내부반복자 사용
+    => 중간처리(매핑, 필터링, 정렬)와 최종처리(반복, 카운팅, 합계, 평균) 가능
+    => 한번 소비(최종처리)되면 재사용 불가(오류나옴) => 재생성 해야함 (재선언 후 사용)
+
+    참고 : Stream, Student, Member
+
+    * 컬렉션 : list, set, 배열 등
+    * 최종처리만 안한다면 중간처리는 얼마든지 가능
+    * 내부반복자 : 개발자가 직접 명시하지 않아도 알아서 결과값을 출력해주는 것
+    * 외부반복자 : 개발자가 직접 명시하는 형태
+        => ex. while 문안에 조건 넣어서 돌리는 등~
+    
+    - 배열 => 스트림
+        Arrays.stream(배열명)
+        Stream<String> 이름 = Stream.of(배열명)
+
+    - 메서드
+        중간처리
+            1) filter(Predicate<? super T> predicate) : 조건필터링
+            2) distinct() : 중복제거
+            3) map(Function<? super T, ? extends Object> mapper) : 스트림의 요소를 변환
+                => map (Function<T, R> mapper) = 단순
+               mapToInt(ToIntFunction<? super T> mapper) : map 의 R 타입이 int
+                => (객체 :: 불러올 메서드) => 이건 = 객체.메서드 와 같음
+               mapToLong() : map 의 R 타입이 long
+               mapToDouble() : map 의 R 타입이 double
+            4) skip(long) : 스트림의 일부를 잘라낼 때 사용
+                => 지정된 숫자만큼 스킵
+            5) limit(long) : 스트림의 일부를 잘라낼 때 사용
+                => 지정된 숫자만큼 제한
+            6) peek() : 중간연산 확인
+                => 이것만 하면 중간연산이기에 출력이 안됨
+                => 코드가 길어지면 중간에 변환이나 값들이 잘 출력됬는지 확인하기 위한 용도
+            7) concat(합칠 스트림1, 합칠 스트림2) : 연결
+                => 같은 타입만 연결 가능
+            
+        최종처리
+            1) forEach(Consumer<? super T> action) : 최종처리(반복)
+                => 내부가 Consumer 와 같음 => () 안에 Consumer의 람다식을 쓰면 됨!
+            2) collect(Collector<? super String, Object, Object> collector)
+            3) count() : 
+            4) sum() : 합계
+            5) average() : 평균
+            6) max() : 최대
+            7) min() : 최소
+
+        기본형태
+            3) range() : 범위
+            4) getAsDouble() : double로 반환
+
+    - Stream 생성
+        Stream.of(T... values) : 가변
+        Stream.of(T t)
+
+<< Optional >>
+
+        참고 : stream 안에 OptionalEX
+
+    - Optional<T>
+        => final 클래스
+        => 최종연산의 결과를 Optional 객체에 담아서 반환
+        => 반환된 결과가 null 인지 매번 if 문으로 체크하는 대신, Optional에 정의된 메서드를 통해서 간단히 처리 가능
+
+        메서드
+            1) get() : Optional 객체 값 가져오기
+            2) orElse(반환할 내용) : null 일때는 () 내용 반환
+            3) isPresent() : null 판명
+                => null이 아닐시 : True 반환
+                => null 일시 : False 반환
+               ifPresent(Consumer<? super Integer> action) : null 판명
+                => null 일시 : 아무일도 안함
+                => ull이 아닐시 : 람다식 실행
+
+        OptionalDouble
+        OptionalInt

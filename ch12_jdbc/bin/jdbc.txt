@@ -15,6 +15,13 @@
 
     - JDBC 작성 순서(규칙)
         1. JDBC 드라이버 로드
+            static {
+                try {
+                    Class.forName("oracle.jdbc.OracleDriver");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
         2. Connection 객체 생성
             url : jdbc:oracle:thin: => 까지는 오라클 연결 문자열(서버마다 상이)
                   @
